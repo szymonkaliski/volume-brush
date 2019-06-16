@@ -4,11 +4,11 @@ const { Vector3 } = require("math-ds");
 
 const brushes = {
   additive: (prev, curr) => prev + curr,
-  peak: (prev, curr) => Math.min(prev, curr),
+  peak: (prev, curr) => Math.max(prev, curr),
   replace: (_, curr) => curr
 };
 
-module.exports = (resolution, scale, brushMode = "additive") => {
+module.exports = (resolution, scale) => {
   const [resX, resY, resZ] = resolution;
   const [scaleX, scaleY, scaleZ] = scale;
 
@@ -17,14 +17,28 @@ module.exports = (resolution, scale, brushMode = "additive") => {
     new Vector3(resX, resY, resZ)
   );
 
-  const updateVoxel = ([x, y, z], newVal) => {
+  const updateVoxel = ([x, y, z], newVal, brushMode) => {
     const vec = new Vector3(x, y, z);
     const val = octree.fetch(vec);
 
     octree.put(vec, brushes[brushMode](val, newVal));
   };
 
-  const brush = (pos, radius, density = 1) => {
+  const brush = (pos, radius, density, brushMode) => {
+    if (!density && !brushMode) {
+      density = 1;
+      brushMode = "additive";
+    }
+
+    if (!brushMode && density) {
+      if (typeof density === "string") {
+        brushMode = density;
+        density = 1;
+      } else {
+        brushMode = "additive";
+      }
+    }
+
     let [cx, cy, cz] = pos;
 
     cx = (cx / scale[0]) * resolution[0];
@@ -59,7 +73,7 @@ module.exports = (resolution, scale, brushMode = "additive") => {
 
           if (d <= cellRadiusX) {
             const cellVal = (1 - d / cellRadiusX) * density;
-            updateVoxel([x, y, z], cellVal);
+            updateVoxel([x, y, z], cellVal, brushMode);
           }
         }
       }

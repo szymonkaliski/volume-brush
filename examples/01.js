@@ -1,18 +1,21 @@
-const serializeObj = require("serialize-wavefront-obj");
 const fs = require("fs");
-
+const serializeObj = require("serialize-wavefront-obj");
 const createVolume = require("../");
 
 const volume = createVolume([64, 64, 64], [100, 100, 100]);
 
-// volume.brush([0, 0, 0], 10);
-// volume.brush([50, 50, 50], 10);
-// volume.brush([99, 99, 99], 10);
+const circlePoint = ([x, y], r, a) => [
+  Math.sin(a) * r + x,
+  Math.cos(a) * r + y
+];
 
+for (let a = 0; a < Math.PI * 2; a += 0.05) {
+  const [x, y] = circlePoint([50, 50], 40, a);
 
-
-volume.brush([50, 50, 50], 60);
-volume.brush([70, 70, 70], 10, -1.0);
+  volume.brush([x, y, 50], 10, "peak");
+  volume.brush([x, 50, y], 10, "peak");
+  volume.brush([50, x, y], 10, "peak");
+}
 
 const mesh = volume.calculateMesh();
 
