@@ -1,0 +1,14 @@
+{
+  "name": "volume-brush",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Szymon Kaliski <hi@szymonkaliski.com> (http://szymonkaliski.com)",
+  "license": "MIT",
+  "dependencies": {
+    "isosurface": "^1.0.0",
+    "math-ds": "^1.1.3",
+    "sparse-octree": "^5.2.1"
+  }
+}

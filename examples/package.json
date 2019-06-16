@@ -1,0 +1,11 @@
+{
+  "name": "volume-brush-examples",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "Szymon Kaliski <hi@szymonkaliski.com> (http://szymonkaliski.com)",
+  "license": "MIT",
+  "dependencies": {
+    "serialize-wavefront-obj": "^1.0.0"
+  }
+}
