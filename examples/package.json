@@ -6,6 +6,8 @@
   "author": "Szymon Kaliski <hi@szymonkaliski.com> (http://szymonkaliski.com)",
   "license": "MIT",
   "dependencies": {
-    "serialize-wavefront-obj": "^1.0.0"
+    "serialize-wavefront-obj": "^1.0.0",
+    "simplex-noise": "^2.4.0",
+    "taubin-smooth": "^1.0.1"
   }
 }
