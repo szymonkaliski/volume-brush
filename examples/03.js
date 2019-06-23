@@ -1,9 +1,11 @@
+// const fs = require("fs");
+// const serializeObj = require("serialize-wavefront-obj");
+
 const SimplexNoise = require("simplex-noise");
-const fs = require("fs");
-const serializeObj = require("serialize-wavefront-obj");
 const taubinSmooth = require("taubin-smooth");
 
 const createVolume = require("../");
+const render = require("./utils/render");
 
 const simplex = new SimplexNoise();
 const volume = createVolume([64, 64, 64], [100, 100, 100]);
@@ -49,9 +51,9 @@ for (let iter = 0; iter < ITERS; iter++) {
     point.pos[0] += point.vel[0];
     point.pos[1] += point.vel[1];
 
-    if (dist([point.pos[0], point.pos[1]], [50, 50]) < 40) {
+    if (dist([point.pos[0], point.pos[1]], [50, 50]) < 50) {
       volume.brush(
-        [point.pos[0], point.pos[1], (point.pos[2] / NUM_POINTS) * 5 + 5],
+        [point.pos[0], point.pos[1], (point.pos[2] / NUM_POINTS) * 5 + 25],
         2,
         1,
         "peak"
@@ -66,5 +68,7 @@ const mesh = volume.calculateMesh();
 mesh.positions = taubinSmooth(mesh.cells, mesh.positions, { iters: 20 });
 console.timeEnd("mesh");
 
-const str = serializeObj(mesh.cells, mesh.positions);
-fs.writeFileSync("./03.obj", str, "utf-8");
+render(mesh);
+
+// const str = serializeObj(mesh.cells, mesh.positions);
+// fs.writeFileSync("./03.obj", str, "utf-8");

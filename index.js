@@ -81,10 +81,24 @@ module.exports = (resolution, scale) => {
   };
 
   const calculateMesh = (k = 0.5) => {
-    return isosurface.surfaceNets(resolution, (x, y, z) => {
+    const complex = isosurface.surfaceNets(resolution, (x, y, z) => {
       const val = octree.fetch(new Vector3(x, y, z)) || 0;
       return k - val;
     });
+
+    for (let i = 0; i < complex.positions.length; i++) {
+      complex.positions[i][0] =
+        ((complex.positions[i][0] - resolution[0] / 2) / resolution[0]) *
+        scale[0];
+      complex.positions[i][1] =
+        ((complex.positions[i][1] - resolution[1] / 2) / resolution[1]) *
+        scale[1];
+      complex.positions[i][2] =
+        ((complex.positions[i][2] - resolution[2] / 2) / resolution[2]) *
+        scale[2];
+    }
+
+    return complex;
   };
 
   return {

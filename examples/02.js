@@ -1,9 +1,11 @@
+// const fs = require("fs");
+// const serializeObj = require("serialize-wavefront-obj");
+
 const SimplexNoise = require("simplex-noise");
-const fs = require("fs");
-const serializeObj = require("serialize-wavefront-obj");
 const taubinSmooth = require("taubin-smooth");
 
 const createVolume = require("../");
+const render = require("./utils/render");
 
 const simplex = new SimplexNoise();
 const volume = createVolume([64, 64, 64], [100, 100, 100]);
@@ -37,5 +39,7 @@ const mesh = volume.calculateMesh();
 mesh.positions = taubinSmooth(mesh.cells, mesh.positions, { iters: 50 });
 console.timeEnd("mesh");
 
-const str = serializeObj(mesh.cells, mesh.positions);
-fs.writeFileSync("./02.obj", str, "utf-8");
+render(mesh);
+
+// const str = serializeObj(mesh.cells, mesh.positions);
+// fs.writeFileSync("./02.obj", str, "utf-8");

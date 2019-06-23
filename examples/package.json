@@ -5,9 +5,18 @@
   "keywords": [],
   "author": "Szymon Kaliski <hi@szymonkaliski.com> (http://szymonkaliski.com)",
   "license": "MIT",
+  "scripts": {
+    "start": "sketchbook-cli . --port 3000"
+  },
   "dependencies": {
     "serialize-wavefront-obj": "^1.0.0",
     "simplex-noise": "^2.4.0",
-    "taubin-smooth": "^1.0.1"
+    "taubin-smooth": "^1.0.1",
+    "three": "^0.105.2",
+    "three-orbitcontrols": "^2.102.1",
+    "three-simplicial-complex": "^69.0.6"
+  },
+  "devDependencies": {
+    "sketchbook-cli": "^1.4.2"
   }
 }
