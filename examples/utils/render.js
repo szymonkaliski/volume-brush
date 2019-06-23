@@ -41,7 +41,7 @@ module.exports = ({ positions, cells }) => {
   scene.add(ambient);
 
   const spot = new THREE.SpotLight();
-  spot.position.set(0, 100, 0);
+  spot.position.set(0, 200, 200);
   scene.add(spot);
 
   const loop = () => {

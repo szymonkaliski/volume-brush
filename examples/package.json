@@ -6,7 +6,8 @@
   "author": "Szymon Kaliski <hi@szymonkaliski.com> (http://szymonkaliski.com)",
   "license": "MIT",
   "scripts": {
-    "start": "sketchbook-cli . --port 3000"
+    "start": "sketchbook-cli . --port 3000",
+    "export": "mkdir export; EXPORT=1 node 01.js; EXPORT=1 node 02.js; EXPORT=1 node 03.js"
   },
   "dependencies": {
     "serialize-wavefront-obj": "^1.0.0",

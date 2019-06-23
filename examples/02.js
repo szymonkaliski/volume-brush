@@ -1,6 +1,3 @@
-// const fs = require("fs");
-// const serializeObj = require("serialize-wavefront-obj");
-
 const SimplexNoise = require("simplex-noise");
 const taubinSmooth = require("taubin-smooth");
 
@@ -39,7 +36,16 @@ const mesh = volume.calculateMesh();
 mesh.positions = taubinSmooth(mesh.cells, mesh.positions, { iters: 50 });
 console.timeEnd("mesh");
 
-render(mesh);
+if (process.env.EXPORT === "1") {
+  console.log("export 02.obj...");
+  const fs = require("fs");
+  const serializeObj = require("serialize-wavefront-obj");
+  const str = serializeObj(mesh.cells, mesh.positions);
+  fs.writeFileSync("./export/02.obj", str, "utf-8");
+} else {
+  render(mesh);
 
-// const str = serializeObj(mesh.cells, mesh.positions);
-// fs.writeFileSync("./02.obj", str, "utf-8");
+  setTimeout(() => {
+    window.sketchbook && window.sketchbook.shot();
+  }, 200);
+}

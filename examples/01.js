@@ -1,6 +1,3 @@
-// const fs = require("fs");
-// const serializeObj = require("serialize-wavefront-obj");
-
 const createVolume = require("../");
 const render = require("./utils/render");
 
@@ -25,7 +22,16 @@ console.time("mesh");
 const mesh = volume.calculateMesh();
 console.timeEnd("mesh");
 
-render(mesh);
+if (process.env.EXPORT === "1") {
+  console.log("export 01.obj...");
+  const fs = require("fs");
+  const serializeObj = require("serialize-wavefront-obj");
+  const str = serializeObj(mesh.cells, mesh.positions);
+  fs.writeFileSync("./export/01.obj", str, "utf-8");
+} else {
+  render(mesh);
 
-// const str = serializeObj(mesh.cells, mesh.positions);
-// fs.writeFileSync("./01.obj", str, "utf-8");
+  setTimeout(() => {
+    window.sketchbook && window.sketchbook.shot();
+  }, 200);
+}
