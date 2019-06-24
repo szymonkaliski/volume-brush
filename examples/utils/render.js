@@ -30,10 +30,15 @@ module.exports = ({ positions, cells }) => {
   const scene = new THREE.Scene();
 
   const geometry = new SimplicialComplex({ positions, cells });
-  geometry.computeFaceNormals();
+  geometry.computeVertexNormals();
+
   const mesh = new THREE.Mesh(
     geometry,
-    new THREE.MeshStandardMaterial({ color: 0xffffff })
+    new THREE.MeshStandardMaterial({
+      color: 0x999999,
+      roughness: 0.1,
+      metalness: 0.1
+    })
   );
   scene.add(mesh);
 

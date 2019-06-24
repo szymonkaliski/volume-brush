@@ -5,7 +5,7 @@ const createVolume = require("../");
 const render = require("./utils/render");
 
 const simplex = new SimplexNoise();
-const volume = createVolume([64, 64, 64], [100, 100, 100]);
+const volume = createVolume([128, 128, 128], [100, 100, 100]);
 
 const ITERS = 10000;
 const MOD_VEL = 0.5;
@@ -62,7 +62,7 @@ console.timeEnd("brush");
 
 console.time("mesh");
 const mesh = volume.calculateMesh();
-mesh.positions = taubinSmooth(mesh.cells, mesh.positions, { iters: 20 });
+mesh.positions = taubinSmooth(mesh.cells, mesh.positions, { iters: 2 });
 console.timeEnd("mesh");
 
 if (process.env.EXPORT === "1") {

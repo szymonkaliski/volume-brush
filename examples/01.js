@@ -1,7 +1,7 @@
 const createVolume = require("../");
 const render = require("./utils/render");
 
-const volume = createVolume([64, 64, 64], [100, 100, 100]);
+const volume = createVolume([128, 128, 128], [100, 100, 100]);
 
 const circlePoint = ([x, y], r, a) => [
   Math.sin(a) * r + x,

@@ -5,26 +5,17 @@ const createVolume = require("../");
 const render = require("./utils/render");
 
 const simplex = new SimplexNoise();
-const volume = createVolume([64, 64, 64], [100, 100, 100]);
-
-const dist = (a, b) => {
-  const x = a[0] - b[0];
-  const y = a[1] - b[1];
-  const z = a[2] - b[2];
-
-  return Math.sqrt(x * x + y * y + z * z);
-};
+const volume = createVolume([128, 128, 128], [100, 100, 100]);
 
 console.time("brush");
-for (let x = 5; x < 95; x += 2) {
-  for (let y = 5; y < 95; y += 2) {
-    for (let z = 5; z < 95; z += 2) {
-      const k = 0.033;
+for (let x = 1; x < 99; x += 1) {
+  for (let y = 1; y < 99; y += 1) {
+    for (let z = 1; z < 99; z += 1) {
+      const k = 0.03;
       const n = simplex.noise3D(x * k, y * k, z * k);
-      const d = dist([x, y, z], [50, 50, 50]);
 
-      if (n > 0.5 && d < 50) {
-        volume.brush([x, y, z], 2, 10, "peak");
+      if (n > 0.5) {
+        volume.brush([x, y, z], 1, "peak");
       }
     }
   }
