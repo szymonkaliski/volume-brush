@@ -1,2 +1,3 @@
 .sketchbook_cli/
 export/
+node_modules/
