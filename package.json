@@ -1,7 +1,7 @@
 {
   "name": "volume-brush",
   "version": "1.0.0",
-  "description": "",
+  "description": "volumetric brush implementation, heavily inspired by toxiclibs",
   "main": "index.js",
   "keywords": [],
   "author": "Szymon Kaliski <hi@szymonkaliski.com> (http://szymonkaliski.com)",

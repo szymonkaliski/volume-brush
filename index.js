@@ -10,7 +10,7 @@ const brushes = {
 
 module.exports = (resolution, scale) => {
   const [resX, resY, resZ] = resolution;
-  const [scaleX, scaleY, scaleZ] = scale;
+  const [scaleX, scaleY, scaleZ] = scale || resultion;
 
   const octree = new PointOctree(
     new Vector3(0, 0, 0),
