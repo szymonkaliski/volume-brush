@@ -13,7 +13,7 @@
     "serialize-wavefront-obj": "^1.0.0",
     "simplex-noise": "^2.4.0",
     "taubin-smooth": "^1.0.1",
-    "three": "^0.105.2",
+    "three": "^0.137.0",
     "three-orbitcontrols": "^2.102.1",
     "three-simplicial-complex": "^69.0.6"
   },
